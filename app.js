@@ -1,5 +1,6 @@
 //Declarations 
 const express = require('express');
+const cors = require('cors');
 var mongoose = require('./Mongoose/mongo_setup'); 
 var {Complaints} = require('./Models/complaintMod');
 var app = express();
@@ -33,7 +34,7 @@ app.use(function (req, res, next) {
 
 
 //Database Entry
-app.post('/submit',(req,res)=>{
+app.post('/submit',cors(),(req,res)=>{
        uniqueKey = new Date().getTime();
       // console.log('Unique Key',uniqueKey);
    var complaints = new Complaints({
@@ -54,7 +55,7 @@ app.post('/submit',(req,res)=>{
 });
 
 //Database full read
-app.get('/complaints',(req,res)=>{
+app.get('/complaints',cors(),(req,res)=>{
  
     
     Complaints.find({}).then((data)=>{
@@ -67,7 +68,7 @@ app.get('/complaints',(req,res)=>{
   );
 
 //Database Read by docKey
-app.get('/track/:docKey',(req,res)=>{
+app.get('/track/:docKey',cors(),(req,res)=>{
  
   var docID = parseInt(req.params.docKey);
   Complaints.find({docKey:docID}).then((data)=>{
@@ -79,7 +80,7 @@ app.get('/track/:docKey',(req,res)=>{
 } 
 );
 //Database Update
-app.put('/update',(req,res)=> {
+app.put('/update',cors(),(req,res)=> {
    
     console.log('inside put docKey:',req.body);
    
@@ -128,7 +129,7 @@ app.put('/update',(req,res)=> {
 
 
 //Database delete by docKey
-app.delete ('/delete/:docKey',(req,res)=>{
+app.delete ('/delete/:docKey',cors(),(req,res)=>{
  
     var docID = parseInt(req.params.docKey);
     console.log("del param:",docID);
