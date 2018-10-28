@@ -8,7 +8,7 @@ var url = 'mongodb://ArunKoshy:abcd2018@ds143603.mlab.com:43603/complaints' ;//p
 //make module exportable
 
 // Use connect method to connect to the Server
-console.log(url);
+
 mongoose.connect(url,
  function (err, db) {
     if (err) {
@@ -16,10 +16,6 @@ mongoose.connect(url,
     } else {
       console.log('Connection established to', url);
   
-      // do some work here with the database.
-  
-      //Close connection
-      //db.close();
     }
   },{ useNewUrlParser: true });
 
